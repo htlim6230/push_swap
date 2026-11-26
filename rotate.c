@@ -1,28 +1,45 @@
-void	rotate_a(t_data *s)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hui-tinl <hui-tinl@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/26 16:13:32 by hui-tinl          #+#    #+#             */
+/*   Updated: 2026/11/26 16:13:47 by hui-tinl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+void	ra(t_data *data, t_stats *stats, int print)
 {
 	int	temp;
 	int	i;
 
-	if (s-> size_a < 2)
+	if (data-> size_a < 2) // guard check if got enough elements to swap
 		return ;
-	temp = s->a[0];
+	temp = data->a[0]; // store the first element in a temporary variable
 	i = 0;
-	while (i < (s->size_a - 1))
+	while (i < (data->size_a - 1)) // (size_a-1) to get last index of array, so we don't go overbound in data->a[i+1]
 	{
-		s->a[i] = s->a[i+1];
+		data->a[i] = data->a[i + 1];
 		i++;
 	}
-	s->a[size_a - 1] = temp;
-	wrote(1, "ra\n", 3);
+	data->a[data->size_a - 1] = temp;
+	if (stats)
+		stats->ra++;
+	if (print)
+		write(1, "ra\n", 3);
 	//ft_putstr_fd("ra", 1);
 }
 
-void	rotate_b(t_data *s)
+void	rb(t_data *data, t_stats *stats, int print)
 {
 	int	temp;
 	int	i;
 
-	if (s-> size_b < 2)
+	if (data-> size_b < 2)
 		return ;
 	temp = s->b[0];
 	i = 0;
@@ -32,60 +49,75 @@ void	rotate_b(t_data *s)
 		i++;
 	}
 	s->b[size_b - 1] = temp;
-	wrote(1, "rb\n", 3);
+	if (stats)
+		stats->rb++;
+	if (print)
+	write(1, "rb\n", 3);
 	//ft_putstr_fd("rb", 1);
 }
 
-void	rotate_ab(t_data *s)
+void	rr(t_data *s, t_stats *stats)
 {
-	rotate_a(s);
-	rotate_b(s);
-	wrote(1, "rr\n", 3);
+	ra(s, NULL, 0);
+	rb(s, NULL, 0);
+	if (stats)
+		stats->rr++;
+	if (print)
+	write(1, "rr\n", 3);
 	//ft_putstr_fd("rr", 1);
 }
 
-void	reverse_rotate_a(t_data *s)
+void	rra(t_data *data, t_stats *stats, int print)
 {
 	int	temp;
 	int	i;
 
-	if (s-> size_a < 2)
+	if (data-> size_a < 2)
 		return ;
-	temp = s->a[s->size_a - 1];
-	i = s->size_a - 1;
+	temp = data->a[data->size_a - 1];
+	i = data->size_a - 1;
 	while (i > 0)
 	{
-		s->a[i] = s->a[i - 1];
+		data->a[i] = data->a[i - 1];
 		i--;
 	}
-	s->a[0] = temp;
-	wrote(1, "rra\n", 4);
+	data->a[0] = temp;
+	if (stats)
+		stats->rra++;
+	if (print)
+	write(1, "rra\n", 4);
 	//ft_putstr_fd("rra", 1);
 }
 
-void	reverse_rotate_b(t_data *s)
+void	rrb(t_data *data, t_stats *stats, int print)
 {
 	int	temp;
 	int	i;
 
-	if (s-> size_b < 2)
+	if (data-> size_b < 2)
 		return ;
-	temp = s->b[s->size_b - 1];
-	i = s->size_b - 1;
+	temp = data->b[data->size_b - 1];
+	i = data->size_b - 1;
 	while (i > 0)
 	{
-		s->b[i] = s->b[i - 1];
+		data->b[i] = data->b[i - 1];
 		i--;
 	}
-	s->b[0] = temp;
+	data->b[0] = temp;
+	if (stats)
+		stats->rrb++;
+	if (print)
 	write(1, "rrb\n", 4);
 	//ft_putstr_fd("rrb", 1);
 }
 
-void	reverse_rotate_ab(t_data *s)
+void	rrr(t_data *data, t_stats *stats, int print)
 {
-	revere_rotate_a(s);
-	reverse_rotate_b(s);
+	rra(data, NULL, 0);
+	rrb(data, NULL, 0);
+	if (stats)
+		stats->rrr++;
+	if (print)
 	write(1, "rrr\n", 5);
 	//ft_putstr_fd("rrr", 1);
 }
