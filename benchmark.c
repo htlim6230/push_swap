@@ -14,4 +14,6 @@
 
 void 
 
-ft_print ("[benchmark] disorder: %d\n", disorder);
+ft_printf ("[bench] disorder: %d\n", disorder);
+ft_printf ("[bench] strategy: %s\n", strategy);
+ft_printf ("[bench] total_ops: ");
